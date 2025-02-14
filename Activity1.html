@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Activity</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .canvas-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border: 1px solid black;
+        }
+        canvas {
+            border: 1px solid rgb(255, 253, 253);
+            width: 400px;
+            height: 300px;
+            background-color: white;
+        }
+        .controls, .color-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas-container">
+        <h2>ACP Activity 1</h2>
+        <p>Select what you want to draw</p>
+        <div class="controls">
+            <button onclick="drawCircle()">Draw a Circle</button>
+            <button onclick="drawRectangle()">Draw a Rectangle</button>
+        </div>
+        <canvas id="drawingCanvas" width="400" height="300"></canvas>
+        <p>Select the color to fill your drawing</p>
+        <div class="color-controls">
+            <button onclick="fillColor('red')">Red</button>
+            <button onclick="fillColor('blue')">Blue</button>
+            <button onclick="fillColor('black')">Black</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        let currentShape = null;
+
+        function drawCircle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(200, 150, 50, 0, Math.PI * 2);
+            ctx.strokeStyle = 'green';
+            ctx.stroke();
+            currentShape = 'circle';
+        }
+
+        function drawRectangle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.rect(150, 120, 100, 60);
+            ctx.strokeStyle = 'green';
+            ctx.stroke();
+            currentShape = 'rectangle';
+        }
+
+        function fillColor(color) {
+            if (currentShape === 'circle') {
+                ctx.beginPath();
+                ctx.arc(200, 150, 50, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+            } else if (currentShape === 'rectangle') {
+                ctx.beginPath();
+                ctx.rect(150, 120, 100, 60);
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+        }
+    </script>
+</body>
+</html>
